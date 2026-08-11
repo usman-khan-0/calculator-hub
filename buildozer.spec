@@ -52,7 +52,7 @@ android.permissions =
 android.api = 34
 
 # (int) Minimum API your APK / AAB will support.
-android.minapi = 23
+android.minapi = 28
 
 # (str) Android NDK version to use
 android.ndk = 25b
@@ -77,11 +77,6 @@ android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aab).
 android.debug_artifact = apk
-
-# (bool) Disable remote debugging to avoid preadv/pwritev compilation errors
-# with Android NDK r25b and Python 3.14
-android.enable_proguard = 0
-android.gradle_dependencies =
 
 [buildozer]
 
