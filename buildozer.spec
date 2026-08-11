@@ -78,6 +78,11 @@ android.release_artifact = aab
 # (str) The format used to package the app for debug mode (apk or aab).
 android.debug_artifact = apk
 
+# (bool) Disable remote debugging to avoid preadv/pwritev compilation errors
+# with Android NDK r25b and Python 3.14
+android.enable_proguard = 0
+android.gradle_dependencies =
+
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
