@@ -26,7 +26,7 @@ version = 1.0.0
 
 # (list) Application requirements
 # fetch python-for-android recipes for these
-requirements = python3,kivy==2.3.1,kivymd==1.2.0,sqlite3,pillow,materialyoucolor,asyncgui,asynckivy
+requirements = python3,kivy==2.3.1,kivymd==1.2.0,pillow
 
 # (str) Presplash / icon (place real assets under assets/icons and assets/images,
 # then point these paths at them)
