@@ -1,0 +1,1 @@
+"""Calculator Hub application package."""

@@ -1,0 +1,67 @@
+#:import dp kivy.metrics.dp
+
+<CalculatorCard>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(72)
+    padding: dp(12), dp(8)
+    spacing: dp(12)
+    radius: [dp(16)]
+    elevation: 1
+    ripple_behavior: True
+    md_bg_color: app.theme_cls.bg_light
+
+    MDIconButton:
+        icon: root.icon_name
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.primary_color
+        pos_hint: {"center_y": 0.5}
+
+    BoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            text: root.title_text
+            bold: True
+            font_style: "Subtitle1"
+            adaptive_height: True
+        MDLabel:
+            text: root.subtitle_text
+            theme_text_color: "Secondary"
+            font_style: "Caption"
+            adaptive_height: True
+
+    MDIconButton:
+        icon: "chevron-right"
+        pos_hint: {"center_y": 0.5}
+
+
+<HomeScreen>:
+    name: "home"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Calculator Hub"
+            elevation: 4
+            right_action_items: [["cog-outline", lambda x: app.open_settings()], ["history", lambda x: app.open_history()]]
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(12), dp(8)
+            size_hint_y: None
+            height: dp(64)
+
+            MDTextField:
+                id: search_field
+                hint_text: "Search calculators..."
+                icon_right: "magnify"
+                on_text: root.on_search_text(self.text)
+
+        ScrollView:
+            MDBoxLayout:
+                id: card_container
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(12), dp(4)
+                spacing: dp(8)

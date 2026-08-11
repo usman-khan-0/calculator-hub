@@ -1,0 +1,17 @@
+#:import dp kivy.metrics.dp
+
+<HistoryScreen>:
+    name: "history"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Calculation History"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: app.go_home()]]
+            right_action_items: [["delete-sweep-outline", lambda x: root.clear_all()]]
+
+        ScrollView:
+            MDList:
+                id: history_list

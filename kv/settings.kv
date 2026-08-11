@@ -1,0 +1,65 @@
+#:import dp kivy.metrics.dp
+
+<SettingsScreen>:
+    name: "settings"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Settings"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: app.go_home()]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(16)
+                spacing: dp(16)
+
+                MDLabel:
+                    text: "Theme"
+                    bold: True
+                    adaptive_height: True
+
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: dp(48)
+                    spacing: dp(8)
+
+                    MDRaisedButton:
+                        text: "Light"
+                        on_release: root.set_theme("Light")
+
+                    MDRaisedButton:
+                        text: "Dark"
+                        on_release: root.set_theme("Dark")
+
+                MDLabel:
+                    text: "Current theme: " + root.theme_style
+                    theme_text_color: "Secondary"
+                    adaptive_height: True
+
+                MDTextField:
+                    id: precision_field
+                    hint_text: "Decimal precision"
+                    text: root.precision_text
+                    input_filter: "int"
+                    on_text_validate: root.set_precision(self.text)
+
+                MDTextField:
+                    id: default_scale_field
+                    hint_text: "Default GPA scale"
+                    text: root.default_scale
+                    readonly: True
+
+                MDRaisedButton:
+                    text: "Clear All History"
+                    md_bg_color: 0.8, 0.2, 0.2, 1
+                    on_release: root.clear_history()
+
+                MDLabel:
+                    text: "About Calculator Hub\n\nCalculator Hub is an offline, all-in-one calculator suite built with Python, Kivy, and KivyMD. Version 1.0.0."
+                    adaptive_height: True
+                    theme_text_color: "Secondary"

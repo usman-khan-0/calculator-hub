@@ -1,0 +1,612 @@
+#:import dp kivy.metrics.dp
+
+<CalculatorButton>:
+    size_hint_y: None
+    height: dp(56)
+    font_size: "20sp"
+    elevation: 1
+
+<TopBar@MDTopAppBar>:
+    elevation: 4
+    left_action_items: [["arrow-left", lambda x: app.go_home()]]
+
+# ---------------------------------------------------------------------------
+# Simple Calculator
+# ---------------------------------------------------------------------------
+<SimpleCalculatorScreen>:
+    name: "simple_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Simple Calculator"
+
+        MDLabel:
+            text: root.display_text
+            font_style: "H4"
+            halign: "right"
+            padding: dp(16), dp(8)
+            size_hint_y: None
+            height: dp(96)
+
+        GridLayout:
+            cols: 4
+            padding: dp(8)
+            spacing: dp(6)
+            size_hint_y: 0.7
+
+            CalculatorButton:
+                text: "C"
+                on_release: root.press_key("C")
+            CalculatorButton:
+                text: "( )"
+                on_release: root.press_key("(") if root.display_text.count("(") <= root.display_text.count(")") else root.press_key(")")
+            CalculatorButton:
+                text: "%"
+                on_release: root.press_key("%")
+            CalculatorButton:
+                text: "÷"
+                on_release: root.press_key("÷")
+
+            CalculatorButton:
+                text: "7"
+                on_release: root.press_key("7")
+            CalculatorButton:
+                text: "8"
+                on_release: root.press_key("8")
+            CalculatorButton:
+                text: "9"
+                on_release: root.press_key("9")
+            CalculatorButton:
+                text: "×"
+                on_release: root.press_key("×")
+
+            CalculatorButton:
+                text: "4"
+                on_release: root.press_key("4")
+            CalculatorButton:
+                text: "5"
+                on_release: root.press_key("5")
+            CalculatorButton:
+                text: "6"
+                on_release: root.press_key("6")
+            CalculatorButton:
+                text: "-"
+                on_release: root.press_key("-")
+
+            CalculatorButton:
+                text: "1"
+                on_release: root.press_key("1")
+            CalculatorButton:
+                text: "2"
+                on_release: root.press_key("2")
+            CalculatorButton:
+                text: "3"
+                on_release: root.press_key("3")
+            CalculatorButton:
+                text: "+"
+                on_release: root.press_key("+")
+
+            CalculatorButton:
+                text: "+/-"
+                on_release: root.press_key("+/-")
+            CalculatorButton:
+                text: "0"
+                on_release: root.press_key("0")
+            CalculatorButton:
+                text: "."
+                on_release: root.press_key(".")
+            CalculatorButton:
+                text: "DEL"
+                on_release: root.press_key("DEL")
+
+            MDRaisedButton:
+                text: "="
+                size_hint: (1, None)
+                height: dp(56)
+                md_bg_color: app.theme_cls.primary_color
+                on_release: root.press_key("=")
+
+
+# ---------------------------------------------------------------------------
+# Scientific Calculator (991ES-style)
+# ---------------------------------------------------------------------------
+<ScientificCalculatorScreen>:
+    name: "scientific_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Scientific Calculator"
+            right_action_items: [["theta", lambda x: root.press_key("MODE")]]
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(24)
+            MDLabel:
+                text: "Mode: " + root.mode_text
+                font_style: "Caption"
+                halign: "right"
+                padding: dp(16), 0
+
+        MDLabel:
+            text: root.display_text
+            font_style: "H5"
+            halign: "right"
+            padding: dp(16), dp(8)
+            size_hint_y: None
+            height: dp(80)
+
+        ScrollView:
+            size_hint_y: 0.75
+            GridLayout:
+                cols: 5
+                padding: dp(6)
+                spacing: dp(5)
+                adaptive_height: True
+                row_default_height: dp(48)
+                row_force_default: True
+
+                CalculatorButton:
+                    text: "sin"
+                    on_release: root.press_key("sin(")
+                CalculatorButton:
+                    text: "cos"
+                    on_release: root.press_key("cos(")
+                CalculatorButton:
+                    text: "tan"
+                    on_release: root.press_key("tan(")
+                CalculatorButton:
+                    text: "AC"
+                    on_release: root.press_key("AC")
+                CalculatorButton:
+                    text: "DEL"
+                    on_release: root.press_key("DEL")
+
+                CalculatorButton:
+                    text: "asin"
+                    on_release: root.press_key("asin(")
+                CalculatorButton:
+                    text: "acos"
+                    on_release: root.press_key("acos(")
+                CalculatorButton:
+                    text: "atan"
+                    on_release: root.press_key("atan(")
+                CalculatorButton:
+                    text: "("
+                    on_release: root.press_key("(")
+                CalculatorButton:
+                    text: ")"
+                    on_release: root.press_key(")")
+
+                CalculatorButton:
+                    text: "log"
+                    on_release: root.press_key("log(")
+                CalculatorButton:
+                    text: "ln"
+                    on_release: root.press_key("ln(")
+                CalculatorButton:
+                    text: "sqrt"
+                    on_release: root.press_key("sqrt(")
+                CalculatorButton:
+                    text: "x²"
+                    on_release: root.press_key("x²")
+                CalculatorButton:
+                    text: "x³"
+                    on_release: root.press_key("x³")
+
+                CalculatorButton:
+                    text: "xʸ"
+                    on_release: root.press_key("^")
+                CalculatorButton:
+                    text: "10ˣ"
+                    on_release: root.press_key("10^x")
+                CalculatorButton:
+                    text: "eˣ"
+                    on_release: root.press_key("e^x")
+                CalculatorButton:
+                    text: "n!"
+                    on_release: root.press_key("fact(")
+                CalculatorButton:
+                    text: "1/x"
+                    on_release: root.press_key("recip(")
+
+                CalculatorButton:
+                    text: "π"
+                    on_release: root.press_key("pi")
+                CalculatorButton:
+                    text: "e"
+                    on_release: root.press_key("e")
+                CalculatorButton:
+                    text: "Ans"
+                    on_release: root.press_key("Ans")
+                CalculatorButton:
+                    text: "M+"
+                    on_release: root.press_key("M+")
+                CalculatorButton:
+                    text: "M-"
+                    on_release: root.press_key("M-")
+
+                CalculatorButton:
+                    text: "MR"
+                    on_release: root.press_key("MR")
+                CalculatorButton:
+                    text: "MC"
+                    on_release: root.press_key("MC")
+                CalculatorButton:
+                    text: "|x|"
+                    on_release: root.press_key("abs(")
+                CalculatorButton:
+                    text: "%"
+                    on_release: root.press_key("%")
+                CalculatorButton:
+                    text: "÷"
+                    on_release: root.press_key("÷")
+
+                CalculatorButton:
+                    text: "7"
+                    on_release: root.press_key("7")
+                CalculatorButton:
+                    text: "8"
+                    on_release: root.press_key("8")
+                CalculatorButton:
+                    text: "9"
+                    on_release: root.press_key("9")
+                CalculatorButton:
+                    text: "×"
+                    on_release: root.press_key("×")
+                CalculatorButton:
+                    text: "C"
+                    on_release: root.press_key("C")
+
+                CalculatorButton:
+                    text: "4"
+                    on_release: root.press_key("4")
+                CalculatorButton:
+                    text: "5"
+                    on_release: root.press_key("5")
+                CalculatorButton:
+                    text: "6"
+                    on_release: root.press_key("6")
+                CalculatorButton:
+                    text: "-"
+                    on_release: root.press_key("-")
+                CalculatorButton:
+                    text: "."
+                    on_release: root.press_key(".")
+
+                CalculatorButton:
+                    text: "1"
+                    on_release: root.press_key("1")
+                CalculatorButton:
+                    text: "2"
+                    on_release: root.press_key("2")
+                CalculatorButton:
+                    text: "3"
+                    on_release: root.press_key("3")
+                CalculatorButton:
+                    text: "+"
+                    on_release: root.press_key("+")
+                CalculatorButton:
+                    text: "0"
+                    on_release: root.press_key("0")
+
+        MDRaisedButton:
+            text: "="
+            size_hint_y: None
+            height: dp(56)
+            md_bg_color: app.theme_cls.primary_color
+            on_release: root.press_key("=")
+
+
+# ---------------------------------------------------------------------------
+# GPA / Semester GPA
+# ---------------------------------------------------------------------------
+<GPACalculatorScreen>:
+    name: "gpa_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: root.calculator_label
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(16)
+                spacing: dp(10)
+
+                MDTextField:
+                    id: course_name
+                    hint_text: "Course name"
+
+                MDTextField:
+                    id: credit_hours
+                    hint_text: "Credit hours"
+                    input_filter: "float"
+
+                MDTextField:
+                    id: grade_field
+                    hint_text: "Grade (e.g. A, B+, C-)"
+
+                MDRaisedButton:
+                    text: "+ Add Course"
+                    on_release: root.add_course(course_name.text, credit_hours.text, grade_field.text.strip().upper())
+
+                MDBoxLayout:
+                    id: course_list
+                    orientation: "vertical"
+                    adaptive_height: True
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                MDRaisedButton:
+                    text: "Calculate GPA"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.calculate()
+
+                MDLabel:
+                    text: root.result_text
+                    adaptive_height: True
+                    padding: 0, dp(12)
+
+
+<SemesterGPACalculatorScreen>:
+    name: "semester_gpa_calculator"
+
+
+# ---------------------------------------------------------------------------
+# CGPA / Cumulative GPA
+# ---------------------------------------------------------------------------
+<CGPACalculatorScreen>:
+    name: "cgpa_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: root.calculator_label
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(16)
+                spacing: dp(10)
+
+                MDTextField:
+                    id: semester_label
+                    hint_text: "Semester label (e.g. Semester 1)"
+
+                MDTextField:
+                    id: semester_gpa
+                    hint_text: "GPA"
+                    input_filter: "float"
+
+                MDTextField:
+                    id: semester_credits
+                    hint_text: "Credit hours"
+                    input_filter: "float"
+
+                MDRaisedButton:
+                    text: "+ Add Semester"
+                    on_release: root.add_semester(semester_label.text, semester_gpa.text, semester_credits.text)
+
+                MDBoxLayout:
+                    id: semester_list
+                    orientation: "vertical"
+                    adaptive_height: True
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                MDRaisedButton:
+                    text: "Calculate CGPA"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.calculate()
+
+                MDLabel:
+                    text: root.result_text
+                    adaptive_height: True
+                    padding: 0, dp(12)
+
+
+<CumulativeGPACalculatorScreen>:
+    name: "cumulative_gpa_calculator"
+
+
+# ---------------------------------------------------------------------------
+# Percentage Calculator
+# ---------------------------------------------------------------------------
+<PercentageCalculatorScreen>:
+    name: "percentage_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Percentage Calculator"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(6)
+
+                MDFlatButton:
+                    text: "% of"
+                    on_release: root.set_mode("percent_of")
+                MDFlatButton:
+                    text: "is % of"
+                    on_release: root.set_mode("what_percent")
+                MDFlatButton:
+                    text: "change"
+                    on_release: root.set_mode("change")
+                MDFlatButton:
+                    text: "reverse"
+                    on_release: root.set_mode("reverse")
+
+            MDTextField:
+                id: percent_value_a
+                hint_text: "First value"
+                input_filter: "float"
+
+            MDTextField:
+                id: percent_value_b
+                hint_text: "Second value"
+                input_filter: "float"
+
+            MDRaisedButton:
+                text: "Calculate"
+                md_bg_color: app.theme_cls.primary_color
+                on_release: root.calculate(percent_value_a.text, percent_value_b.text)
+
+            MDLabel:
+                text: root.result_text
+                adaptive_height: True
+                padding: 0, dp(12)
+
+
+# ---------------------------------------------------------------------------
+# Grade Calculator
+# ---------------------------------------------------------------------------
+<GradeCalculatorScreen>:
+    name: "grade_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Grade Calculator"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+
+            MDTextField:
+                id: obtained_marks
+                hint_text: "Obtained marks"
+                input_filter: "float"
+
+            MDTextField:
+                id: total_marks
+                hint_text: "Total marks"
+                input_filter: "float"
+
+            MDRaisedButton:
+                text: "Calculate Grade"
+                md_bg_color: app.theme_cls.primary_color
+                on_release: root.calculate(obtained_marks.text, total_marks.text)
+
+            MDLabel:
+                text: root.result_text
+                adaptive_height: True
+                padding: 0, dp(12)
+
+
+# ---------------------------------------------------------------------------
+# Average Calculator
+# ---------------------------------------------------------------------------
+<AverageCalculatorScreen>:
+    name: "average_calculator"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Average Calculator"
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(16)
+                spacing: dp(10)
+
+                MDTextField:
+                    id: number_field
+                    hint_text: "Enter a number"
+                    input_filter: "float"
+
+                MDRaisedButton:
+                    text: "+ Add Number"
+                    on_release: root.add_number(number_field.text)
+
+                MDBoxLayout:
+                    id: number_list
+                    orientation: "vertical"
+                    adaptive_height: True
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                MDRaisedButton:
+                    text: "Calculate"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.calculate()
+
+                MDLabel:
+                    text: root.result_text
+                    adaptive_height: True
+                    padding: 0, dp(12)
+
+
+# ---------------------------------------------------------------------------
+# Unit Converter
+# ---------------------------------------------------------------------------
+<UnitConverterScreen>:
+    name: "unit_converter"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        TopBar:
+            title: "Unit Converter"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+
+            MDTextField:
+                id: category_field
+                hint_text: "Category"
+                text: root.category
+                readonly: True
+                on_focus: if self.focus: root.open_category_menu(category_field)
+
+            MDTextField:
+                id: from_unit_field
+                hint_text: "From"
+                text: root.from_unit
+                readonly: True
+                on_focus: if self.focus: root.open_from_menu(from_unit_field)
+
+            MDTextField:
+                id: to_unit_field
+                hint_text: "To"
+                text: root.to_unit
+                readonly: True
+                on_focus: if self.focus: root.open_to_menu(to_unit_field)
+
+            MDTextField:
+                id: convert_value
+                hint_text: "Value"
+                input_filter: "float"
+
+            MDRaisedButton:
+                text: "Convert"
+                md_bg_color: app.theme_cls.primary_color
+                on_release: root.convert_value(convert_value.text)
+
+            MDLabel:
+                text: root.result_text
+                adaptive_height: True
+                padding: 0, dp(12)
