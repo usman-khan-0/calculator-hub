@@ -26,8 +26,8 @@ version = 1.0.0
 
 # (list) Application requirements
 # fetch python-for-android recipes for these
-# Using compatible versions: Kivy 2.3.1 with KivyMD 1.1.1
-requirements = python3,kivy==2.3.1,kivymd==1.1.1,pillow
+# Using stable, compatible versions: Kivy 2.3.1 with KivyMD 0.104.2
+requirements = python3,kivy==2.3.1,kivymd==0.104.2,pillow
 
 # (str) Presplash / icon (place real assets under assets/icons and assets/images,
 # then point these paths at them)
@@ -92,4 +92,3 @@ build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .aab, .ipa) storage
 bin_dir = ./bin
-
