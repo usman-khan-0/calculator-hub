@@ -26,8 +26,8 @@ version = 1.0.0
 
 # (list) Application requirements
 # fetch python-for-android recipes for these
-# Using only core dependencies - KivyMD will be pulled as Kivy dependency
-requirements = python3,kivy==2.3.1,pillow
+# Python 3.11 is used for compatibility with Python-for-Android and pip
+requirements = python3.11,kivy==2.3.1,pillow
 
 # (str) Presplash / icon (place real assets under assets/icons and assets/images,
 # then point these paths at them)
