@@ -1,3 +1,4 @@
+# Application dependencies for development and testing
 Kivy==2.3.1
-kivymd==1.2.0
+KivyMD==1.2.0
 pytest==8.3.3
